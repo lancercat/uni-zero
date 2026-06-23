@@ -1,0 +1,240 @@
+
+
+import torch
+
+from neko_sdk.log import fatal
+from neko_sdk.neko_framework_NG.UAE.neko_modwrapper_agent import neko_module_wrapping_agent as ama
+from neko_sdk.neko_framework_NG.workspace import neko_workspace, neko_environment
+import cv2
+import numpy as np
+from neko_sdk.cfgtool.argsparse import neko_get_arg
+from multiprocess.pool import Pool
+
+
+# collate the image by scaling them down to max_area.
+# not really for the word samples, where we need to specify the minimum size.
+
+# but for character recognition tasks, its good enough.
+
+def collate_max_area_core(cv2_image,max_target_area,pad_w,pad_h,pad_val):
+    # Convert RGB to BGR (which is the default color format used by OpenCV)
+    if(len(cv2_image.shape)==2):
+        cv2_image = np.expand_dims(cv2_image, axis=-1);
+    if(len(cv2_image.shape)!=3):
+        fatal("wut");
+    original_h, original_w, original_c = cv2_image.shape
+    original_a=original_w*original_h
+    # Calculate the aspect ratio
+    # for somereason we need resize to make toxic data less so--- at least look like an image.
+    if(original_a>max_target_area or original_h<2 or original_w<2):
+        aspect_ratio = original_w / max(original_h,1);
+        new_h=np.sqrt(original_a/aspect_ratio);
+        new_w=new_h*aspect_ratio;
+        new_h=max(2,int(new_h));
+        new_w = max(2, int(new_w));
+        resized_image = cv2.resize(cv2_image, (new_w, new_h), interpolation=cv2.INTER_LINEAR);
+    else:
+        new_h=original_h;
+        new_w = original_w;
+        resized_image=cv2_image;
+
+    if(len(resized_image.shape)==2):
+        resized_image=resized_image.reshape([new_h,new_w,1]); # sometimes cv2.resize will eat the extra dim of gray scale.
+    if(pad_h>0 or pad_w>0):
+        if(pad_val>=0):
+            # Create a black background with the target size
+            background = np.zeros((new_h+pad_h+pad_h, new_w+pad_w+pad_w, original_c), dtype=np.uint8)+int(pad_val);
+        else:
+            background = np.zeros((new_h+pad_h+pad_h, new_w+pad_w+pad_w, original_c), dtype=np.uint8)+np.mean(resized_image,axis=(0,1)).astype(np.uint8);
+
+        # Calculate the position to paste the resized image
+        offset_x = pad_w
+        offset_y = pad_h
+        background[
+            offset_y+pad_h:offset_y +pad_h+ new_h,
+            offset_x+pad_w:offset_x+pad_w+ new_w] = resized_image;
+    else:
+        background=resized_image;
+    # don't mvn yet. we have queues so don't try everything in a same place.
+    return np.transpose(background,[2,0,1]);
+
+def collate_max_area_pil(params):
+    image_pil,target_area,pad_w,pad_h,pad_val=params;
+
+    pil_image = image_pil.convert('RGB')
+
+    # Convert PIL Image to numpy array
+    numpy_image = np.array(pil_image)
+
+    # Convert RGB to BGR (which is the default color format used by OpenCV)
+    cv2_image = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR);
+    return collate_max_area_core(cv2_image, target_area, pad_w, pad_h, pad_val);
+def collate_max_area_cv2(params):
+    cv2_image,target_area,pad_w,pad_h,pad_val=params;
+    return collate_max_area_core(cv2_image, target_area, pad_w, pad_h, pad_val);
+
+def collate_max_area_in_parallel_cv2(images,target_area,pad_w,pad_h,pad_val,pool:Pool):
+    ads=[(i,target_area,pad_w,pad_h,pad_val) for i in images];
+    # if (type(images[0]) != type(np.array(0))):
+    #     fatal("???");
+    return pool.map(collate_max_area_cv2,ads);
+def collate_max_area_in_parallel_pil(images,target_area,pad_w,pad_h,pad_val,pool:Pool):
+    ads=[(i,target_area,pad_w,pad_h,pad_val) for i in images];
+    return pool.map(collate_max_area_pil,ads);
+
+def collate_max_area_serial_cv2(images,target_area,pad_w,pad_h,pad_val):
+    ads=[(i,target_area,pad_w,pad_h,pad_val) for i in images];
+    # if (type(images[0]) != type(np.array(0))):
+    #     fatal("???");
+    return [collate_max_area_cv2(ad) for ad in ads];
+def collate_max_area_serial_pil(images,target_area,pad_w,pad_h,pad_val):
+    ads=[(i,target_area,pad_w,pad_h,pad_val) for i in images];
+
+    return [collate_max_area_pil(ad) for ad in ads]
+
+
+class neko_image_collate_max_area_align_cv2(ama):
+    INPUT_raw_images="raw_images";
+    OUTPUT_tensor_images="tensor_images";
+
+    PARAM_template_size_area="template_size";
+    PARAM_padding_size_hw="padding_size";
+
+    PARAM_padding_val="padding_val";
+    DEFAULT_PAD_VAL=-1;# use mean padding
+
+    def set_mod_io(this, iocvt_dict, modcvt_dict):
+        this.raw_images = this.register_input(this.INPUT_raw_images, iocvt_dict);
+        this.tensor_images = this.register_input(this.OUTPUT_tensor_images, iocvt_dict);
+
+        pass;
+
+    def set_etc(this, params):
+        this.template_area = neko_get_arg(this.PARAM_template_size_area, params);
+        this.padding_size_h,this.padding_size_w = neko_get_arg(this.PARAM_padding_size_hw, params,(1,1)); # just pad 1 pixel if not otherwise specified.
+        this.padding_val=neko_get_arg(this.PARAM_padding_val,params,this.DEFAULT_PAD_VAL);
+        this.core_area=this.template_area
+
+        pass;
+
+    def take_action(this, workspace: neko_workspace, environment: neko_environment):
+        raw_images = workspace.get(this.raw_images);
+        all_ims=collate_max_area_serial_cv2(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+                                         this.padding_val);
+        tim=[torch.tensor(im, dtype=torch.float) for im in all_ims];
+        workspace.add(this.tensor_images,tim);
+        return workspace, environment;
+
+    @classmethod
+    def get_agtcfg(cls,
+                   raw_images,
+                   tensor_images,
+                    template_size_hw,padding_size_hw,padding_val
+                   ):
+        return {"agent": cls,
+                "params": {"iocvt_dict": {cls.INPUT_raw_images: raw_images, cls.OUTPUT_tensor_images: tensor_images},
+                           cls.PARAM_padding_size_hw: padding_size_hw, cls.PARAM_template_size_area: template_size_hw,
+                           "modcvt_dict": {}}};
+
+# these are used to collate semseg/instseg masks
+
+class neko_mask_collate_max_area_align_cv2(neko_image_collate_max_area_align_cv2):
+    def take_action(this, workspace: neko_workspace, environment: neko_environment):
+        try:
+            raw_images = workspace.get(this.raw_images);
+            all_ims=collate_max_area_serial_cv2(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+                                             this.padding_val);
+            tim=[torch.tensor(im) for im in all_ims];
+            workspace.add(this.tensor_images,tim);
+        except:
+            pass; # if  weird things happen in this batch, don't train it
+
+        return workspace, environment;
+
+class neko_mask_list_collate_max_area_align_cv2(neko_image_collate_max_area_align_cv2):
+    def take_action(this, workspace: neko_workspace, environment: neko_environment):
+        try:
+            raw_images_lst = workspace.get(this.raw_images);
+            all_im_lst=[collate_max_area_serial_cv2(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+                                             this.padding_val) for raw_images in raw_images_lst] ;
+            tim=[torch.tensor(all_ims) for all_ims in all_im_lst];
+            workspace.add(this.tensor_images,tim);
+        except:
+            pass; # if  weird things happen in this batch, don't train it
+
+        return workspace, environment;
+class neko_bin_mask_list_collate_max_area_align_cv2(neko_image_collate_max_area_align_cv2):
+    def take_action(this, workspace: neko_workspace, environment: neko_environment):
+        try:
+            raw_images_lst = workspace.get(this.raw_images);
+            all_im_lst=[collate_max_area_serial_cv2(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+                                             this.padding_val) for raw_images in raw_images_lst];
+            tim=[torch.tensor(np.array(all_ims)/255.,dtype=torch.float32).permute(1,0,2,3) if len(all_ims) else torch.zeros([1,0,9,9],dtype=torch.float32) for all_ims in all_im_lst];
+            workspace.add(this.tensor_images,tim);
+        except:
+            pass; # if  weird things happen in this batch, don't train it
+
+        return workspace, environment;
+class neko_image_collate_max_area_align_pil( neko_image_collate_max_area_align_cv2):
+    def take_action(this, workspace: neko_workspace, environment: neko_environment):
+        raw_images = workspace.get(this.raw_images);
+        all_ims=collate_max_area_serial_pil(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+                                         this.padding_val);
+        workspace.add(this.tensor_images,[torch.tensor(im, dtype=torch.float) for im in all_ims]);
+        return workspace, environment;
+
+# do parallel elsewhere for the sake of cache affinity....
+#
+#
+
+#
+# class neko_image_collate_max_area_align_cv2_para(ama):
+#     INPUT_raw_images="raw_images";
+#     OUTPUT_tensor_images="tensor_images";
+#
+#     PARAM_template_size_area="template_size";
+#     PARAM_padding_size_hw="padding_size";
+#
+#     PARAM_padding_val="padding_val";
+#     DEFAULT_PAD_VAL=-1;# use mean padding
+#
+#     def set_mod_io(this, iocvt_dict, modcvt_dict):
+#         this.raw_images = this.register_input(this.INPUT_raw_images, iocvt_dict);
+#         this.tensor_images = this.register_input(this.OUTPUT_tensor_images, iocvt_dict);
+#
+#         pass;
+#
+#     def set_etc(this, params):
+#         this.template_area = neko_get_arg(this.PARAM_template_size_area, params);
+#         this.padding_size_h,this.padding_size_w = neko_get_arg(this.PARAM_padding_size_hw, params,(1,1)); # just pad 1 pixel if not otherwise specified.
+#         this.padding_val=neko_get_arg(this.PARAM_padding_val,params,this.DEFAULT_PAD_VAL);
+#         this.core_area=this.template_area
+#         this.pool=Pool(neko_get_arg("workers",params,12));
+#
+#         pass;
+#
+#     def take_action(this, workspace: neko_workspace, environment: neko_environment):
+#         raw_images = workspace.get(this.raw_images);
+#         all_ims=collate_max_area_in_parallel_cv2(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+#                                          this.padding_val, this.pool);
+#         tim=[torch.tensor(im, dtype=torch.float) for im in all_ims];
+#         workspace.add(this.tensor_images,tim);
+#         return workspace, environment;
+#
+#     @classmethod
+#     def get_agtcfg(cls,
+#                    raw_images,
+#                    tensor_images,
+#                     template_size_hw,padding_size_hw,padding_val
+#                    ):
+#         return {"agent": cls,
+#                 "params": {"iocvt_dict": {cls.INPUT_raw_images: raw_images, cls.OUTPUT_tensor_images: tensor_images},
+#                            cls.PARAM_padding_size_hw: padding_size_hw, cls.PARAM_template_size_area: template_size_hw,
+#                            "modcvt_dict": {}}}
+# class neko_image_collate_max_area_align_pil_para( neko_image_collate_max_area_align_cv2_para):
+#     def take_action(this, workspace: neko_workspace, environment: neko_environment):
+#         raw_images = workspace.get(this.raw_images);
+#         all_ims=collate_max_area_in_parallel_pil(raw_images, this.core_area, this.padding_size_w, this.padding_size_h,
+#                                          this.padding_val, this.pool);
+#         workspace.add(this.tensor_images,[torch.tensor(im, dtype=torch.float) for im in all_ims]);
+#         return workspace, environment;

@@ -40,7 +40,7 @@ from neko_2025_NGNW.common.factories.typical_parts.cross_task_training.xtcs impo
 from neko_2025_NGNW.common.factories.components.debug.result_vis_factory import debug_vis_agent_factory
 from neko_2025_NGNW.common.factories.components.prototyper.as_proto import neko_as_prototype_factory
 # from neko_2025_NGNW.common.factories.components.prototyper.id_tied_centers import neko_embedding_pool_aggr_part_factory
-# from neko_2025_NGNW.common.factories.presets.seqcls_head import neko_lpos_roiseq_factoy, neko_ctc_roiseq_factory
+from neko_2025_NGNW.common.factories.presets.seqcls_head import neko_lpos_roiseq_factoy, neko_ctc_roiseq_factory
 from neko_2025_NGNW.common.factories.presets.im2vec import neko_object320_feitem_factory
 
 
@@ -54,7 +54,13 @@ from osocrNG.modular_agents_ocrNG.debugging_agents.log_saver.simple_sample_image
     neko_simple_seq_logging_agent
 )
 from osocrNG.modular_agents_ocrNG.debugging_agents.log_saver.simple_sample_tensor_image_saver import neko_simple_tensor_img_logging_agent
+from neko_2025_NGNW.common.factories.presets.feseq import (
+    neko_object320_feseq_factory_cntr_sqz,
+    neko_object320_feseq_wnaish_factory_cntr_lcam, neko_object320_feseq_wnaish_factory_cntr_lcamXA,
+    neko_object320_feseq_wnaish_factory_cntr_lcam_lsct_share_tfe_hack,
+    neko_object320_feseq_wnaish_factory_cntr_lcam_lsct_share_tfe_hack_ind,
 
+)
 # we need a way for routed fef.
 class neko_object320_oscr_no_route_factory:
 
@@ -81,18 +87,18 @@ class neko_object320_oscr_no_route_factory:
     def mkfeseq_item(this)->neko_object320_feitem_factory:
         return neko_object320_feitem_factory(this.core,{});
     def mkfeseqcls_head(this):
-        return None
-    def mksemseg_head(this):
-        return neko_dense_val_semseg_factory(this.core,{});
-    def mkca_insseg_head(this):
-        return neko_first_gtlen_aux_cls_agnostic_insseg_factory(this.core,{});
+        return neko_ctc_roiseq_factory(this.core,{});
+    # def mksemseg_head(this):
+    #     return neko_dense_val_semseg_factory(this.core,{});
+    # def mkca_insseg_head(this):
+    #     return neko_first_gtlen_aux_cls_agnostic_insseg_factory(this.core,{});
 
     def __init__(this, platform_cfg: neko_platform_cfg, params):
         this.core=this.mk_core(platform_cfg, params);
-        # this.feseqf=this.mkfeseq_roiseq();
+        this.feseqf=this.mkfeseq_roiseq();
         this.feitemf=this.mkfeseq_item();
         # this.fetfef=this.mkfetfe(); # this is to just make fe and tfe for sem/ins-seg.
-        # this.seqcls_head=this.mkfeseqcls_head();
+        this.seqcls_head=this.mkfeseqcls_head();
         # this.semseg_head=this.mksemseg_head(); # instance segmentation will have a different head, there will be a third head to combine both.
         # this.ordered_ca_insseg_head=this.mkca_insseg_head();
 
@@ -200,11 +206,11 @@ class neko_object320_oscr_no_route_factory:
 
         for task in tome.imcls_task_handlers:
             modcfg, bogocfg = this.arm_unique_mod_for_imcls_task(modcfg, bogocfg, tome.imcls_task_handlers[task]);
-        # for task in tome.ordered_roiseq_task_handlers:
-        #     if(this.seqcls_head is None):
-        #         print("skipping cls, this is likly caused by a debugging panoptic seg branch");
-        #     else:
-        #         modcfg, bogocfg = this.seqcls_head.arm_unique_mod_for_seqcls_task(modcfg, bogocfg, tome.ordered_roiseq_task_handlers[task]);
+        for task in tome.ordered_roiseq_task_handlers:
+            if(this.seqcls_head is None):
+                print("skipping cls, this is likly caused by a debugging panoptic seg branch");
+            else:
+                modcfg, bogocfg = this.seqcls_head.arm_unique_mod_for_seqcls_task(modcfg, bogocfg, tome.ordered_roiseq_task_handlers[task]);
         # for task in tome.semseg_task_handlers:
         #     modcfg,bogocfg=this.semseg_head.arm_unique_mod_for_semseg_task(modcfg, bogocfg, tome.semseg_task_handlers[task]);
         # for task in tome.insseg_task_handlers:

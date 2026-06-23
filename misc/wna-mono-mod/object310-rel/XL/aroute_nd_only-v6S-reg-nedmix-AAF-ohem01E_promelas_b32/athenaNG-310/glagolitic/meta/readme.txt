@@ -1,0 +1,3 @@
+words from https://upload.wikimedia.org/wikipedia/commons/8/86/Glagolitsa_in_Zagreb_cathedral.jpg 
+Nah I don't understand the content... 
+If its offensive, racist, or can make any certain group of people or cats really angry, tell me to remove it.

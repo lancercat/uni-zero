@@ -13,6 +13,7 @@ from neko_sdk.neko_framework_NG.names import P,PLST
 
 from dataclasses import dataclass, field,asdict
 from typing import Dict, Any, List,Tuple
+from neko_2025_NGNW.common.object_32x_presets.templates.lsct_stream_profiles import neko_lsct_template
 
 # building plans: datatree, model tree and task tree module bindings,etc
 # some parts are nerfed--- please wait till we find a proper slot to publish the full 32x framework
@@ -180,6 +181,43 @@ class neko_320_tome(neko_320_fpbpgrp_tome):
                 meta_profile[neko_meta_stream_profile.SIDE_INFO_MBND][dldr_ep],
                 this.net_size_meta.item_data_size);
 
+
+    # sometime the data and meta are muxed together in headless lsct.
+    def mount_lsct_char_muxed_stream(this,name,lsct_profile,fpbpgrp="main"):
+        this.diskldr_lprofile_dict[name]=lsct_profile;
+        if (fpbpgrp not in this.fpbpgrps):
+            this.fpbpgrps[fpbpgrp] = neko_320_fpbpgrp_tome();
+
+        for dldr_ep in lsct_profile[neko_lsct_template.DATA_ENDPOINTS]:
+            this.mount_datastream_im_item_core(name,dldr_ep,dldr_ep,this.net_size_meta.item_data_size);
+            this.fpbpgrps[fpbpgrp].mount_datastream_im_item_core(name,dldr_ep,dldr_ep,this.net_size_meta.item_data_size);
+
+
+    def mount_lsct_char_stream(this,name,lsct_profile,fpbpgrp="main"):
+        this.diskldr_lprofile_dict[name]=lsct_profile;
+        if (fpbpgrp not in this.fpbpgrps):
+            this.fpbpgrps[fpbpgrp] = neko_320_fpbpgrp_tome();
+
+        for dldr_ep in lsct_profile[neko_lsct_template.DATA_ENDPOINTS]:
+            this.mount_datastream_im_item_core(name,dldr_ep,dldr_ep,this.net_size_meta.item_data_size);
+            this.fpbpgrps[fpbpgrp].mount_datastream_im_item_core(name,dldr_ep,dldr_ep,this.net_size_meta.item_data_size);
+
+        for mldr_ep in lsct_profile[neko_lsct_template.META_ENDPOINTS]:
+            this.mount_metasream_im_item_core(name, mldr_ep, mldr_ep,this.net_size_meta.item_data_size);
+            this.fpbpgrps[fpbpgrp].mount_metasream_im_item_core(name, mldr_ep, mldr_ep,this.net_size_meta.item_data_size);
+
+    def mount_lsct_seq_stream(this,name,lsct_profile,fpbpgrp="main"):
+        this.diskldr_lprofile_dict[name]=lsct_profile;
+        if (fpbpgrp not in this.fpbpgrps):
+            this.fpbpgrps[fpbpgrp] = neko_320_fpbpgrp_tome();
+
+        for dldr_ep in lsct_profile[neko_lsct_template.DATA_ENDPOINTS]:
+            this.mount_datastream_word_im_seq_core(name,dldr_ep,dldr_ep,this.net_size_meta.word_im_data_size);
+            this.fpbpgrps[fpbpgrp].mount_datastream_word_im_seq_core(name,dldr_ep,dldr_ep,this.net_size_meta.word_im_data_size);
+
+        for mldr_ep in lsct_profile[neko_lsct_template.META_ENDPOINTS]:
+            this.mount_metasream_im_item_core(name, mldr_ep, mldr_ep,this.net_size_meta.item_data_size);
+            this.fpbpgrps[fpbpgrp].mount_metasream_im_item_core(name, mldr_ep, mldr_ep,this.net_size_meta.item_data_size);
 
     def add_simple_oscr_task(this,data_ep_name,meta_ep_name,task_mod_name,task_ep_name=None,fpbpgrp="main"):
         if (fpbpgrp not in this.fpbpgrps):

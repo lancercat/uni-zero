@@ -32,7 +32,9 @@ from neko_2025_NGNW.common.object_32x_presets.cfgutil import virtual_agt_factory
 # for testing, meta need to be loaded first for prototype caching---
 # for training, data needs to be loaded first so we can sample meta---
 # that's why this thing is so twisted.
-
+from neko_2025_NGNW.common.object_32x_presets.templates.lsct_stream_profiles import neko_lsct_repeater_template,neko_lsct_char_random_template
+from neko_2025_NGNW.common.object_32x_presets.lsct.repeater import neko_lsct_shadow_factory
+from neko_2025_NGNW.common.object_32x_presets.lsct.rand_char_lmdb import neko_lsct_rand_char_glyphdb_factory
 
 # that's a huge weight off shoulder bcs we don't need to worry wrapping queues in a service, which is a messy hell :)
 # the collate here does not really "collate" it --- it just collate thumbnails
@@ -274,8 +276,8 @@ class neko_32x_training_data_loader_agent_factory(neko_32x_data_loader_agent_fac
     # PANOPTIC_DLDRF = panoptic_multisource_lmdb_scale_balanced_fetch;
 
     MLDRF=training_sampled_meta_agt_factory;
-    # LSCT_SHAD=neko_lsct_shadow_factory;
-    # LSCTC_RAND=neko_lsct_rand_char_glyphdb_factory;
+    LSCT_SHAD=neko_lsct_shadow_factory;
+    LSCTC_RAND=neko_lsct_rand_char_glyphdb_factory;
 
     DATA_EPS="data_eps";
     META_EPS = "meta_eps";
@@ -456,8 +458,8 @@ class neko_32x_training_data_loader_agent_factory(neko_32x_data_loader_agent_fac
         this.im_text_dldrf=this.IM_TEXT_DLDRF();
         # this.panoptic_dldrf = this.PANOPTIC_DLDRF();
 
-        # this.lsctf=this.LSCT_SHAD();
-        # this.lsct_rand_f=this.LSCTC_RAND();
+        this.lsctf=this.LSCT_SHAD();
+        this.lsct_rand_f=this.LSCTC_RAND();
 
 
     # this will need to wait. We don't fetch here... we fetch when meta is loaded.

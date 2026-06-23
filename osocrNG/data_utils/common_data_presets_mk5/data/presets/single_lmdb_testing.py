@@ -1,6 +1,5 @@
 from neko_sdk.cfgtool.argsparse import neko_get_arg
 from osocrNG.data_utils.common_data_presets_mk5.virtual_mk5_datafactory import neko_virtual_factory_mk5
-from osocrNG.data_utils.common_data_presets_mk5.data.deprecated.list_im_collators import neko_im_text_collate_factory
 from osocrNG.data_utils.common_data_presets_mk5.data.datarepos.ordered_lmdb_factory import single_ordered_lmdb_factory
 class lmdb_testing(neko_virtual_factory_mk5):
     DATA_PRFX = "dataprfx";

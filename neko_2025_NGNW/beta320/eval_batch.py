@@ -198,30 +198,68 @@ class executer:
 
     pass;
 if __name__ == '__main__':
-    ITRS_LATEX ={"_E1_I20000":"VIII", "_E1_I40000":"X", "_E2":"XII"};
-    PK_LATEX={'ecr-v3R_val_fsl_1shot-task_performance':"FslVal",
-              'ecr-v3R_val_osr_1shot-task_performance':"OsrVal",
-              'ecr-v3R_test_fsl_1shot-task_performance':"FslTest",
-              'ecr-v3R_test_osr_1shot-task_performance':"OsrTest"
-    }
-    RESD={
-            "ours": ["b1nf-1024-ecrv3R-abiaug-48-48", "b1nf-1024-ecrv3R-abiaug-48-48-run2"],
-            "noaug": ["b1nf-1024-ecrv3R-noaug-48-48", "b1nf-1024-ecrv3R-noaug-48-48-run2"],
-            "shareall": ["b1nf-1024-ecrv3RTW-abiaug-48-48", "b1nf-1024-ecrv3RTW-abiaug-48-48-run2"],
-    }
-    MD={
-        "ecrV3R":{
-        "ours":["b1nf-1024-ecrv3R-abiaug-48-48","b1nf-1024-ecrv3R-abiaug-48-48-run2"],
-        "noaug": ["b1nf-1024-ecrv3R-noaug-48-48", "b1nf-1024-ecrv3R-noaug-48-48-run2"],
-        "shareall": ["b1nf-1024-ecrv3RTW-abiaug-48-48", "b1nf-1024-ecrv3RTW-abiaug-48-48-run2"],
+    PD={'jpn_hori_gzsl-task_performance':"GZSLJP",
+        'kr_hori_gzsl-task_performance':"GZSLKR",
+        'syn_yi_hori_gzsl-task_performance': "GZSLSYi",
+        "istrval_bengali-task_performance": "GZSLVBE",
+        "istrval_gujarati-task_performance": "GZSLVGU",
+        "istrval_hindi-task_performance": "CVHI",
+        "istrval_punjabi-task_performance": "CVPU",
+        "istrval_kannada-task_performance": "CVKA",
+        "istrval_tamil-task_performance": "CVTE",
+        "istrval_telugu-task_performance": "CVTA",
+        "istrval_odia-task_performance": "CVOD",
+        "istrval_marathi-task_performance": "CVMAR",
+        "istrval_malayalam-task_performance": "CVMAL",
+        "istrtest_bengali-task_performance": "GZSLTBE",
+        "istrtest_gujarati-task_performance": "GZSLTGU",
+        "istrtest_hindi-task_performance": "CTHI",
+        "istrtest_punjabi-task_performance": "CTPU",
+        "istrtest_kannada-task_performance": "CTKA",
+        "istrtest_tamil-task_performance": "CTTE",
+        "istrtest_telugu-task_performance": "CTTA",
+        "istrtest_odia-task_performance": "CTOD",
+        "istrtest_marathi-task_performance": "CTMAR",
+        "istrtest_malayalam-task_performance": "CTMAL",
+        }
+    STRA={
+        "Indc":{
+            "CamCtc" : ["b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128","b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128-run2"],
+            "CamLpos": ["b1h1NF-1024-indc2-cntralgn-lcam-lposReal-32-128","b1h1NF-1024-indc2-cntralgn-lcam-lposReal-32-128-run2"],
+            "SqzCtc": ["b1h1NF-1024-indc2-cntralgn-sqz-lctc-32-128","b1h1NF-1024-indc2-cntralgn-sqz-lctc-32-128-run2"]
+        },
+        "Ostr": {
+            "CamCtc" :["b1NF-1024-ostr-cntralgn-lcam-lpos-32-128","b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-run2"],
+            "CamLpos": ["b2NF-1024-ostr-cntralgn-lcam-lposReal-32-128",
+                        "b2NF-1024-ostr-cntralgn-lcam-lposReal-32-128-run2"],
+            "SqzCtc": ["b1dNF-1024-ostr-cntralgn-sqz-lctc-32-128","b1dNF-1024-ostr-cntralgn-sqz-lctc-32-128-run2"]
         }
     }
+    CFLA={
+        "Indc": {
+            "BigBuc": ["b1h4NF-1024-indc-cntralgn-lcam-ctc-32-128"],
+            "ConflCamCtc": ["b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128"],
+        }
+    }
+    LSCTA={
+         "Ostr": {
+        "Xbatch": ["b1NFXB4-1024-ostr-cntralgn-lcam-lpos-32-128", "b1NFXB4-1024-ostr-cntralgn-lcam-lpos-32-128-run2"],
+        "ShufSA": ["b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT","b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-run2"],
+            "FRC": ["b1iNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctFRC_RealNI64",
+                   "b1iNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctFRC_RealNI64-run2"],
+        "ShufFRC": ["b1jNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-lsctFRC_RealNI64","b1jNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-lsctFRC_RealNI64-run2"],
+    },
+        "indc": {
+            "ShufSA": ["b1h2NF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT",
+                       "b1h2NF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-run2"],
+
+            "FRC": ["b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctFRC_RealNI64",
+                          "b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctFRC_RealNI64-run2"],
+            "ShufFRC": ["b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-lsctFRC_RealNI64",
+                          "b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-lsctFRC_RealNI64-run2"],
+        }
+    }
+
     e=executer();
-    e.eval_batch(MD);
-    rd=collect_results("/home/lasercat/writebuffer/tmp/hydra_results_icdar26/",resd=RESD);
-    sd=generate_stats(rd);
-    stats_tex = export_stats_commands(sd, PK_LATEX, RESD.keys());
-    raw_tex = export_raw_commands(rd, PK_LATEX, ITRS_LATEX, RESD)
-    print(stats_tex);
-    print(raw_tex);
-    pass;
+    e.eval_batch(LSCTA);
+    e.generate_latex_report("/run/media/lasercat/writebuffer/tmp/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/writebuffer/tmp/hydra_results_eccv/lscta.tex")

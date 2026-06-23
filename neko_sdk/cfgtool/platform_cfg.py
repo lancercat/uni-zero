@@ -40,7 +40,7 @@ class neko_platform_cfg:
 
     def __init__(this, cfg):
         if(cfg is None):
-            this.set_up(find_data_root(),"/home/lasercat/hydra_saves/","/home/lasercat/hydra_logs/",["cuda:0"]);
+            this.set_up(find_data_root(),"/run/media/lasercat/320-eccv/hydra_saves/","/run/media/lasercat/320-eccv/hydra_logs/",["cuda:0"]);
         elif(type(cfg)==str):
             with open(cfg, "r") as fp:
                 c = json.load(fp);
@@ -61,7 +61,7 @@ class platform_cfg:
 
     def __init__(this, cfg):
         if(cfg is None):
-            this.set_up(find_data_root(),"/home/lasercat/hydra_saves/","/home/lasercat/hydra_logs/",["cuda:0"]);
+            this.set_up(find_data_root(),"/run/media/lasercat/320-eccv/hydra_saves/","/run/media/lasercat/320-eccv/hydra_logs/",["cuda:0"]);
         elif(type(cfg)==str):
             with open(cfg, "r") as fp:
                 c = json.load(fp);

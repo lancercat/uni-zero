@@ -1,0 +1,4 @@
+from neko_2025_NGNW.common.object_32x_presets.tasks.taskgrps.egpt import arm_egptology_task_grp
+from neko_2025_NGNW.common.object_32x_presets.tasks.taskgrps.mjst import arm_mjst_task_grp
+from neko_2025_NGNW.common.object_32x_presets.tasks.taskgrps.ctw import arm_ctwch_task_grp
+from neko_2025_NGNW.common.object_32x_presets.tasks.taskgrps.ostr import arm_chs_jpnkr_hori_task_grp

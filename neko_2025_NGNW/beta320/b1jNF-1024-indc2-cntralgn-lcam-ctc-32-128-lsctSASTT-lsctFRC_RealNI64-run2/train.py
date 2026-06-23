@@ -13,7 +13,7 @@ from net import get_tra
 from multiprocessing import set_start_method
 
 if __name__ == '__main__':
-    set_start_method("fork")
+    set_start_method("forkserver")
     torch.backends.cudnn.benchmark=False; # bcs cotrianing will mess it up.
     tome = neko_320_tome();
     tome.net_size_meta=neko_320_net_size_meta({

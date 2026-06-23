@@ -86,7 +86,7 @@ class neko_balance_fetching_and_mixing_agent(neko_abstract_async_agent_gen1):
         else:
             fatal("error");
 
-    def start(this,mapping_param,environment,mode="fork"):
+    def start(this,mapping_param,environment,mode="forkserver"):
         this.status = this.STATUS_running;
         this.servants={};
         this.queue_dict={};
@@ -107,7 +107,7 @@ class neko_balance_fetching_and_mixing_agent(neko_abstract_async_agent_gen1):
         for k in this.servants:
             this.servants[k].start(None,None,mode);
         this.mount_environment(mapping_param, environment);
-        if (mode == "fork"):
+        if (mode == "forkserver"):
             this.worker = multiprocessing.Process(target=this.action_loop);
         else:
             this.worker = multiprocessing.get_context(mode).Process(target=this.action_loop);

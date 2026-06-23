@@ -199,7 +199,7 @@ class neko_abstract_async_agent(neko_abstract_agent):
         this.workspace = None;
     def launch(this,mode):
         this.status = this.STATUS_running;
-        if (mode == "fork"):
+        if (mode == "forkserver"):
             this.worker = multiprocessing.Process(target=this.action_loop);
         elif(mode=="forkserver"):
             this.worker = multiprocessing.get_context(mode).Process(target=this.action_loop);
@@ -282,12 +282,12 @@ class neko_abstract_async_agent_gen1(neko_abstract_async_agent):
         else:
             this.environment=this.make_private_enviroment(environment,param[this.PARAM_remapping])
 
-    def start(this,mapping_param,environment,mode="fork"):
+    def start(this,mapping_param,environment,mode="forkserver"):
         this.stop();
         this.mount_environment(mapping_param,environment);
         this.launch(mode);
         pass;
-    def start_sync(this,mapping_param,environment,mode="fork"):
+    def start_sync(this,mapping_param,environment,mode="forkserver"):
         this.stop();
         this.mount_environment(mapping_param, environment);
         this.status = this.STATUS_running;

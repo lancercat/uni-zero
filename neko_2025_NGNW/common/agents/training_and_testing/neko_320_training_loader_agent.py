@@ -49,7 +49,7 @@ class neko_320_training_loader_agent(neko_abstract_sync_agent):
         this.set_venv();
         for a,n in zip(this.allagts,this.allnames):
             info("starting",n);
-            a.start(this.venv, "fork");
+            a.start(this.venv, "forkserver");
             info("started",n);
     def arm_serial(this,acfg_dict,iq,oq):
         alist=[];

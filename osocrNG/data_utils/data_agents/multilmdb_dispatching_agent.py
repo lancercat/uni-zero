@@ -104,7 +104,7 @@ class neko_balance_fetching_and_dispatching_agent(neko_abstract_async_agent_gen1
         else:
             fatal("error");
 
-    def start(this,mapping_param,environment,mode="fork"):
+    def start(this,mapping_param,environment,mode="forkserver"):
         this.stop();
         this.mount_environment(mapping_param,environment);
         this.servants={};

@@ -528,7 +528,7 @@ if __name__ == '__main__':
         qd[qk]=mpQueue(maxsize=9);
     e=neko_environment(queue_dict=qd);
     for ak in ad:
-        ad[ak]["agent"].start(ad[ak]["params"],e,mode="fork");
+        ad[ak]["agent"].start(ad[ak]["params"],e,mode="forkserver");
     st=time.time();
     for i in tqdm.tqdm(range(100)):
         aug_data=qd["dq"].get();

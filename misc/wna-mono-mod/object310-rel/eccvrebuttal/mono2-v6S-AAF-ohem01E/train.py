@@ -32,7 +32,7 @@ if __name__ == '__main__':
     e=neko_environment(assets_dict={},queue_dict=trqd,modset=modset);
 
     for a in trad:
-        trad[a]["agent"].start(trad[a]["params"], e,"fork");
+        trad[a]["agent"].start(trad[a]["params"], e,"forkserver");
 
     tac=af.get_testers({"main":tedd},anchors);
     tra=af.get_trainer(tac,anchors,DQN);

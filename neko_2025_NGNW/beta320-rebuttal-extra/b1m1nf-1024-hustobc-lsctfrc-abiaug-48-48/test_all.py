@@ -13,7 +13,10 @@ from neko_2025_NGNW.common.object_32x_presets.tasks.taskgrps.egptv3 import arm_e
 
 from net import get_tea
 
+import multiprocessing
+
 if __name__ == '__main__':
+    multiprocessing.set_start_method("fork");
     torch.backends.cudnn.benchmark=False; # bcs cotrianing will mess it up.
     tome = neko_320_tome();
     tome.net_size_meta=neko_320_net_size_meta({

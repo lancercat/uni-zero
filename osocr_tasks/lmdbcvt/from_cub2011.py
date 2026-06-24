@@ -153,7 +153,7 @@ if __name__ == '__main__':
     from PIL import Image, ImageDraw
     import matplotlib.pyplot as plt
 
-    root="/run/media/lasercat/writebuffer/tmp/cub/"
+    root="/run/media/lasercat/320-eccv/results/cub/"
     dataset = datasets.load_dataset("bentrevett/caltech-ucsd-birds-200-2011")
     split="train";
     export_cub_split(dataset, root, split);

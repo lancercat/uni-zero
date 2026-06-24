@@ -86,7 +86,7 @@ class osclsNG_perinstance_top20(abstract_cent):
             all[i]=outcls[i][label[i]];
         return all;
     def visualize(this,outcls,scale=4):
-        cv2.imwrite("/run/media/lasercat/writebuffer/tmp/meow.jpg",(outcls*scale).to(torch.uint8).cpu().numpy());
+        cv2.imwrite("/run/media/lasercat/320-eccv/results/meow.jpg",(outcls*scale).to(torch.uint8).cpu().numpy());
         cv2.waitKey(10);
     def gradone(this,logits,labels):
         return trnf.softmax(logits,dim=1)-trnf.one_hot(labels,logits.shape[1]);

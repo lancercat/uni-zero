@@ -24,6 +24,6 @@ def make_ethopian_lmdb(root,dst):
             ir.add_data_utf(cv2.imread(f), d[os.path.basename(f)], "Ethopian");
 
 if __name__ == '__main__':
-    make_ethopian_lmdb("/run/media/lasercat/writebuffer/mooster-ex2/HHD-Ethiopic","/run/media/lasercat/writebuffer/tmp/ethopian/")
+    make_ethopian_lmdb("/run/media/lasercat/writebuffer/mooster-ex2/HHD-Ethiopic","/run/media/lasercat/320-eccv/results/ethopian/")
 
 

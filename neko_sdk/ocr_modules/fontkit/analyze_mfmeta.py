@@ -108,7 +108,7 @@ def show_bad(froot):
 
 
 if __name__ == '__main__':
-    wfroot = "/run/media/lasercat/writebuffer/tmp/glyphdb_utf_260202/";
+    wfroot = "/run/media/lasercat/320-eccv/results/glyphdb_utf_260202/";
     froot = "/run/media/lasercat/data/data_setstone/synth_lsct/glyphdb_utf_260202";
     from neko_sdk.ocr_modules.charset.chs_cset import t1_3755
     from neko_sdk.ocr_modules.charset.etc_cset import latin62

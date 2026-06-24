@@ -114,7 +114,7 @@ def to_utf_list_and_masterdict(srcdict):
 
 
 # we don't wish to duplicate db if we don't have to.
-def export_sdict(srcdict,name,meta_root="/run/media/lasercat/writebuffer/tmp/dicts_v3/"):
+def export_sdict(srcdict,name,meta_root="/run/media/lasercat/320-eccv/results/dicts_v3/"):
     mdict,ulist=to_utf_list_and_masterdict(srcdict)
     v3_dict_from_list(ulist,name,meta_root,master_dict=mdict);
 
@@ -165,7 +165,7 @@ def reduce_dic(d,ks):
         rd[k]=rs;
     return rd;
 if __name__ == '__main__':
-    a=torch.load("/run/media/lasercat/writebuffer/tmp/ecr-v3-R/sta.pt");
+    a=torch.load("/run/media/lasercat/320-eccv/results/ecr-v3-R/sta.pt");
     ar=reduce_dic(a,a);
     ttd={};
     for k in ar:
@@ -178,9 +178,9 @@ if __name__ == '__main__':
     trd={};
     ted = {};
     vad = {};
-    vad=add_file_tree("/run/media/lasercat/writebuffer/tmp/ecr-v3-R/Validation",vad);
-    trd=add_file_tree("/run/media/lasercat/writebuffer/tmp/ecr-v3-R/Training",trd);
-    ted= add_file_tree("/run/media/lasercat/writebuffer/tmp/ecr-v3-R/Testing", ted);
+    vad=add_file_tree("/run/media/lasercat/320-eccv/results/ecr-v3-R/Validation",vad);
+    trd=add_file_tree("/run/media/lasercat/320-eccv/results/ecr-v3-R/Training",trd);
+    ted= add_file_tree("/run/media/lasercat/320-eccv/results/ecr-v3-R/Testing", ted);
 
 
     sorted_dict(trd);
@@ -216,7 +216,7 @@ if __name__ == '__main__':
     # this does not make sense--- but if you want to test on training set.
     export_lmdb(trs, "ecr_v3_tra_support");
 
-    torch.save(astat,"/run/media/lasercat/writebuffer/tmp/ecr-v3-R/sta.pt")
+    torch.save(astat,"/run/media/lasercat/320-eccv/results/ecr-v3-R/sta.pt")
     #
     with open("support_samples_testing.json", 'w') as f:
         json.dump(tes, f, indent=4, sort_keys=True)

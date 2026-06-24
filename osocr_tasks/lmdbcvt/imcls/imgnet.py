@@ -65,8 +65,8 @@ if __name__ == '__main__':
     from PIL import Image, ImageDraw
     import matplotlib.pyplot as plt
 
-    sroot="/run/media/lasercat/writebuffer/tmp/tin200/tiny-imagenet-200/"
-    droot="/run/media/lasercat/writebuffer/tmp/tin-200/"
+    sroot="/run/media/lasercat/320-eccv/results/tin200/tiny-imagenet-200/"
+    droot="/run/media/lasercat/320-eccv/results/tin-200/"
 
     # # dataset = datasets.load_dataset("bentrevett/caltech-ucsd-birds-200-2011")
     # split="train";

@@ -7,8 +7,8 @@ if __name__ == '__main__':
     from PIL import Image, ImageDraw
     import matplotlib.pyplot as plt
 
-    sroot="/run/media/lasercat/writebuffer/tmp/wiertenc/extract/rscd/"
-    droot="/run/media/lasercat/writebuffer/tmp/rscd/"
+    sroot="/run/media/lasercat/320-eccv/results/wiertenc/extract/rscd/"
+    droot="/run/media/lasercat/320-eccv/results/rscd/"
 
     # dataset = datasets.load_dataset("bentrevett/caltech-ucsd-birds-200-2011")
     split="train";

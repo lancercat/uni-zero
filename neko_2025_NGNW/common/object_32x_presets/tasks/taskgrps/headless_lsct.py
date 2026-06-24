@@ -13,11 +13,11 @@ from osocrNG.data_utils.common_data_presets_mk5.data.presets.protocol.train_data
     get_ctw_yolox_tr,get_ctw_yolox_val,get_ctw_yolox_te,get_enword_te
 from osocrNG.data_utils.common_data_presets_mk5.data.presets.protocol.train_data_dict_collection import get_abi_mjst
 
-from neko_sdk.ocr_modules.charset.testing_csets import jpnhv,jpnhv_kr_collateral
-from neko_sdk.ocr_modules.charset.chs_cset import t1_3755
-from neko_sdk.ocr_modules.charset.etc_cset import latin62
-from neko_sdk.ocr_modules.charset.kr_charset import contains_hangul
-from neko_sdk.ocr_modules.charset.yi import yichars
+from osocrNG.charset.testing_csets import jpnhv,jpnhv_kr_collateral
+from osocrNG.charset.chs_cset import t1_3755
+from osocrNG.charset.etc_cset import latin62
+from osocrNG.charset.kr_charset import contains_hangul
+from osocrNG.charset.yi import yichars
 from neko_sdk.log import fatal,info,warn
 import torch
 

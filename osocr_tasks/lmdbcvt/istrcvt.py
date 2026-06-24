@@ -23,6 +23,6 @@ def make_indic_lmdb(root,dst):
                 ir.add_data_utf(cv2.imread(f),g,l);
 
 if __name__ == '__main__':
-    make_indic_lmdb("/run/media/lasercat/writebuffer/mooster-ex2/istr-10th-Sep/unarxiv","/run/media/lasercat/writebuffer/tmp/indiclmdb/")
+    make_indic_lmdb("/run/media/lasercat/writebuffer/mooster-ex2/istr-10th-Sep/unarxiv","/run/media/lasercat/320-eccv/results/indiclmdb/")
 
 

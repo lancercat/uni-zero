@@ -3,9 +3,7 @@ import copy
 from neko_sdk.cfgtool.argsparse import neko_get_arg
 from neko_sdk.neko_framework_NG.UAE.neko_modwrapper_agent import neko_module_wrapping_agent
 from neko_sdk.neko_framework_NG.workspace import neko_workspace, neko_environment
-from neko_sdk.ocr_modules.io.encdec import decode_prob;
 from osocrNG.sptokens import tUNKREP
-from osocrNG.names import default_ocr_variable_names as dvn
 from neko_sdk.log import warn
 
 import torch

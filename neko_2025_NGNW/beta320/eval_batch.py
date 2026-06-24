@@ -142,6 +142,7 @@ class executer:
     def __init__(this):
         this.dir=os.path.abspath(os.curdir);
         this.pythonpath=os.path.join(this.dir,"../../");
+        print(this.pythonpath);
         this.itrs_map = {
             "_E1_I20000": "VIII",
             "_E1_I40000": "X",
@@ -261,5 +262,11 @@ if __name__ == '__main__':
     }
 
     e=executer();
+    e.eval_batch(STRA);
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", STRA, PD,
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/stra.tex")
+    e.eval_batch(CFLA);
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", CFLA, PD,
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/cfla.tex")
     e.eval_batch(LSCTA);
-    e.generate_latex_report("/run/media/lasercat/writebuffer/tmp/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/writebuffer/tmp/hydra_results_eccv/lscta.tex")
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta.tex")

@@ -28,7 +28,7 @@ if __name__ == '__main__':
         pcfg=neko_platform_cfg(None);
     tome = arm_chs_jpnkr_hori_task_grp(pcfg, tome);
 
-    te=get_tea(pcfg, tome,"/run/media/lasercat/writebuffer/tmp/hydra_results/");
+    te=get_tea(pcfg, tome,"/run/media/lasercat/320-eccv/results/hydra_results/");
 
     # with torch.autocast(device_type=pcfg.devices[0], dtype=torch.float16, enabled=True):
     te.modset.load("_E0_I20000");

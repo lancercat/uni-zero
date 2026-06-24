@@ -28,7 +28,7 @@ if __name__ == '__main__':
         pcfg=neko_platform_cfg(None);
     tome = arm_egptology_v3R_task_grp(pcfg, tome);
     curname=os.path.basename(os.getcwd());
-    logpath=os.path.join("/run/media/lasercat/writebuffer/tmp/hydra_results/", curname);
+    logpath=os.path.join("/run/media/lasercat/320-eccv/results/hydra_results/", curname);
     shutil.rmtree(logpath,ignore_errors=True);
     os.makedirs(logpath)
     te=get_tea(pcfg, tome,0,0,logpath);

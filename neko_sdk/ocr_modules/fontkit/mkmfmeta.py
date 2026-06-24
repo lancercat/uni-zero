@@ -49,9 +49,9 @@ g=neko_string_mask_generator({
     neko_string_mask_generator.PARAM_orientations: [0]
 });
 pool=Pool(12);
-shutil.rmtree("/run/media/lasercat/writebuffer/tmp/glyphdb_utf_260202/",ignore_errors=True);
-os.makedirs("/run/media/lasercat/writebuffer/tmp/glyphdb_utf_260202/");
-b=neko_support_db_builder("/run/media/lasercat/writebuffer/tmp/glyphdb_utf_260202/");
+shutil.rmtree("/run/media/lasercat/320-eccv/results/glyphdb_utf_260202/",ignore_errors=True);
+os.makedirs("/run/media/lasercat/320-eccv/results/glyphdb_utf_260202/");
+b=neko_support_db_builder("/run/media/lasercat/320-eccv/results/glyphdb_utf_260202/");
 
 for f in mgr.meta["fnt_charset"]:
     if(f=="main"):

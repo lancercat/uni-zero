@@ -38,14 +38,14 @@ def arm_hustobc_task_grp(pcfg:neko_platform_cfg,tome:neko_320_tome,aug=None,tie_
     }
     if(aug=="abinet"):
         dprofile_egpch=neko_datastream_profile.get_abi_aug_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root,trd,HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root,trd,HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey_scale=grey);
     elif aug is None:
         dprofile_egpch = neko_datastream_profile.get_default_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey_scale=grey);
     else:
         fatal("wut");
         dprofile_egpch = neko_datastream_profile.get_default_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128,force_grey_scale=grey);
 
     tome.mount_datastream_im_item(HUSTOBC_CHAR_DATA,dprofile_egpch,FPBPG);
 
@@ -83,7 +83,7 @@ def arm_hustobc_task_grp(pcfg:neko_platform_cfg,tome:neko_320_tome,aug=None,tie_
 
     val_dprofile_ctwch = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                    vald,
-                                                                                   HUSTOBC_CHAR_DATA_SIG, 32,force_grey=grey);
+                                                                                   HUSTOBC_CHAR_DATA_SIG, 32,force_grey_scale=grey);
 
     ted={
         "typename": "hustobc_te",
@@ -93,7 +93,7 @@ def arm_hustobc_task_grp(pcfg:neko_platform_cfg,tome:neko_320_tome,aug=None,tie_
     };
     te_dprofile_ctwch = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                    ted,
-                                                                                   HUSTOBC_CHAR_DATA_SIG, 32,force_grey=grey);
+                                                                                   HUSTOBC_CHAR_DATA_SIG, 32,force_grey_scale=grey);
     tome.mount_testing_char_osr_im("hustobc_val_fsl_1shot", val_dprofile_ctwch, val_mprof_hustobc_fsl, HUSTOBC_TSK_FSOS,False);
 
 
@@ -143,14 +143,14 @@ def arm_hustobc_zero_task_grp(pcfg: neko_platform_cfg, tome: neko_320_tome, aug=
     }
     if (aug == "abinet"):
         dprofile_egpch = neko_datastream_profile.get_abi_aug_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey_scale=grey);
     elif aug is None:
         dprofile_egpch = neko_datastream_profile.get_default_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey_scale=grey);
     else:
         fatal("wut");
         dprofile_egpch = neko_datastream_profile.get_default_training_im_item_loader(
-            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey=grey);
+            HUSTOBC_CHAR_DATA, pcfg.data_root, trd, HUSTOBC_CHAR_DATA_SIG, batchsize=128, force_grey_scale=grey);
 
     tome.mount_datastream_im_item(HUSTOBC_CHAR_DATA, dprofile_egpch, FPBPG);
 
@@ -200,15 +200,15 @@ def arm_hustobc_zero_task_grp(pcfg: neko_platform_cfg, tome: neko_320_tome, aug=
     val_dprofile_gzsl = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     vald_gzsl,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     val_dprofile_zero = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     vald_zero,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     val_dprofile_seen = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     vald_seen,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     tome.mount_testing_char_osr_im("hustobc_val_fsl_gssl", val_dprofile_gzsl, val_mprof_hustobc_fsl, HUSTOBC_TSK_FSOS,
                                    False);
     tome.mount_testing_char_osr_im("hustobc_val_fsl_gssl_unseen", val_dprofile_zero, val_mprof_hustobc_fsl, HUSTOBC_TSK_FSOS,
@@ -239,15 +239,15 @@ def arm_hustobc_zero_task_grp(pcfg: neko_platform_cfg, tome: neko_320_tome, aug=
     test_dprofile_gzsl = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     testd_gzsl,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     test_dprofile_zero = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     testd_zero,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     test_dprofile_seen = neko_datastream_profile.get_default_testing_im_item_loader(HUSTOBC_CHAR_DATA,
                                                                                     testd_seen,
                                                                                     HUSTOBC_CHAR_DATA_SIG, 32,
-                                                                                    force_grey=grey);
+                                                                                    force_grey_scale=grey);
     tome.mount_testing_char_osr_im("hustobc_test_fsl_gssl", test_dprofile_gzsl, te_mprof_hustobc_fsl, HUSTOBC_TSK_FSOS,
                                    False);
     tome.mount_testing_char_osr_im("hustobc_test_fsl_gssl_unseen", test_dprofile_zero, te_mprof_hustobc_fsl, HUSTOBC_TSK_FSOS,

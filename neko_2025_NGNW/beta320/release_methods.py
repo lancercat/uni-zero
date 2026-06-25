@@ -38,7 +38,10 @@ LSCTA={
                       "b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-lsctFRC_RealNI64-run2"],
     }
 }
-
+UNI = {
+    "Uni": {"Fin": ["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT",
+                    "b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
+}
 
 def cp(methods_list, src_root, dst_root):
     """
@@ -66,7 +69,7 @@ def cp(methods_list, src_root, dst_root):
 
 if __name__ == '__main__':
     # Combine all target dictionaries into a list
-    all_dicts = [STRA, CFLA, LSCTA]
+    all_dicts = [UNI]
 
     # Use a set to collect only unique method names
     unique_methods = set()

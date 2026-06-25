@@ -49,7 +49,7 @@ if __name__ == '__main__':
         logpath = os.path.join("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", curname + iterk);
         shutil.rmtree(logpath, ignore_errors=True);
         os.makedirs(logpath)
-        te = get_tra(pcfg, tome, 0, 0);
+        te = get_tea(pcfg, tome, 0, 0, logpath);
         te.modset.load(iterk);
         rds = te.test(0, ITRS[iterk]);
         ars[iterk] = rds;

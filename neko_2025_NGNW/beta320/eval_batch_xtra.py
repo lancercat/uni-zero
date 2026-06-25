@@ -199,29 +199,7 @@ class executer:
 
     pass;
 if __name__ == '__main__':
-    PD={'jpn_hori_gzsl-task_performance':"GZSLJP",
-        'kr_hori_gzsl-task_performance':"GZSLKR",
-        'syn_yi_hori_gzsl-task_performance': "GZSLSYi",
-        "istrval_bengali-task_performance": "GZSLVBE",
-        "istrval_gujarati-task_performance": "GZSLVGU",
-        "istrval_hindi-task_performance": "CVHI",
-        "istrval_punjabi-task_performance": "CVPU",
-        "istrval_kannada-task_performance": "CVKA",
-        "istrval_tamil-task_performance": "CVTE",
-        "istrval_telugu-task_performance": "CVTA",
-        "istrval_odia-task_performance": "CVOD",
-        "istrval_marathi-task_performance": "CVMAR",
-        "istrval_malayalam-task_performance": "CVMAL",
-        "istrtest_bengali-task_performance": "GZSLTBE",
-        "istrtest_gujarati-task_performance": "GZSLTGU",
-        "istrtest_hindi-task_performance": "CTHI",
-        "istrtest_punjabi-task_performance": "CTPU",
-        "istrtest_kannada-task_performance": "CTKA",
-        "istrtest_tamil-task_performance": "CTTE",
-        "istrtest_telugu-task_performance": "CTTA",
-        "istrtest_odia-task_performance": "CTOD",
-        "istrtest_marathi-task_performance": "CTMAR",
-        "istrtest_malayalam-task_performance": "CTMAL",
+    PD={'jpn_hori_ostr-task_performance':"OSTRJP",
         }
     STRA={
         "Indc":{
@@ -266,14 +244,14 @@ if __name__ == '__main__':
     e=executer();
     e.eval_batch(STRA);
     e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", STRA, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/stra.tex")
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/stra_xproto.tex")
     e.eval_batch(CFLA);
     e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", CFLA, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/cfla.tex")
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/cfla_xproto.tex")
 
     e.eval_batch(UNI);
     e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", UNI, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/uni.tex")
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/uni_xproto.tex")
 
     e.eval_batch(LSCTA);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta.tex")
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta_xproto.tex")

@@ -199,19 +199,10 @@ class executer:
 
     pass;
 if __name__ == '__main__':
-    PD={'jpn_hori_gzsl-task_performance':"GZSLJP",
-        'kr_hori_gzsl-task_performance':"GZSLKR",
-        'syn_yi_hori_gzsl-task_performance': "GZSLSYi",
-        "istrval_bengali-task_performance": "GZSLVBE",
-        "istrval_gujarati-task_performance": "GZSLVGU",
-        "istrval_hindi-task_performance": "CVHI",
-        "istrval_punjabi-task_performance": "CVPU",
-        "istrval_kannada-task_performance": "CVKA",
-        "istrval_tamil-task_performance": "CVTE",
-        "istrval_telugu-task_performance": "CVTA",
-        "istrval_odia-task_performance": "CVOD",
-        "istrval_marathi-task_performance": "CVMAR",
-        "istrval_malayalam-task_performance": "CVMAL",
+    PD={'hustobc_test_fsl_1shot-task_performance':"COra",
+        "hustobc_test_fsl_gssl-task_performance": "GSSLOra",
+        'hustobc_test_fsl_gssl_seen-task_performance': "GSSLOraS",
+        "hustobc_test_fsl_gssl_unseen-task_performance": "GSSLOraU",
         "istrtest_bengali-task_performance": "GZSLTBE",
         "istrtest_gujarati-task_performance": "GZSLTGU",
         "istrtest_hindi-task_performance": "CTHI",
@@ -223,57 +214,24 @@ if __name__ == '__main__':
         "istrtest_marathi-task_performance": "CTMAR",
         "istrtest_malayalam-task_performance": "CTMAL",
         }
-    STRA={
-        "Indc":{
-            "CamCtc" : ["b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128","b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128-run2"],
-            "CamLpos": ["b1h1NF-1024-indc2-cntralgn-lcam-lposReal-32-128","b1h1NF-1024-indc2-cntralgn-lcam-lposReal-32-128-run2"],
-            "SqzCtc": ["b1h1NF-1024-indc2-cntralgn-sqz-lctc-32-128","b1h1NF-1024-indc2-cntralgn-sqz-lctc-32-128-run2"]
+    DLC={
+        "Ora":{
+            "Many" : ["b1m1nf-1024-hustobc-lsctfrc-abiaug-48-48"],
+            "SSL": ["b1m3nf-1024-hustobcZ-lsctfrc-abiaug-48-48-re"],
         },
-        "Ostr": {
-            "CamCtc" :["b1NF-1024-ostr-cntralgn-lcam-lpos-32-128","b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-run2"],
-            "CamLpos": ["b2NF-1024-ostr-cntralgn-lcam-lposReal-32-128",
-                        "b2NF-1024-ostr-cntralgn-lcam-lposReal-32-128-run2"],
-            "SqzCtc": ["b1dNF-1024-ostr-cntralgn-sqz-lctc-32-128","b1dNF-1024-ostr-cntralgn-sqz-lctc-32-128-run2"]
+        "Aff": {
+            "Bas" :["b1l1NF-1024-hindi-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-kannada-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-malayalam-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-marathi-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-odia-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-punjabi-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-tamil-cntralgn-lcam-ctc-32-128",
+                    "b1l1NF-1024-telugu-cntralgn-lcam-ctc-32-128"]
         }
     }
-    CFLA={
-        "Indc": {
-            "BigBuc": ["b1h4NF-1024-indc-cntralgn-lcam-ctc-32-128"],
-            "ConflCamCtc": ["b1h1NF-1024-indc2-cntralgn-lcam-ctc-32-128"],
-        }
-    }
-    LSCTA={
-         "Ostr": {
-        "Xbatch": ["b1NFXB4-1024-ostr-cntralgn-lcam-lpos-32-128", "b1NFXB4-1024-ostr-cntralgn-lcam-lpos-32-128-run2"],
-        "ShufSA": ["b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT","b1NF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-run2"],
-            "FRC": ["b1iNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctFRC_RealNI64",
-                   "b1iNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctFRC_RealNI64-run2"],
-        "ShufFRC": ["b1jNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-lsctFRC_RealNI64","b1jNF-1024-ostr-cntralgn-lcam-lpos-32-128-lsctSHSTT-lsctFRC_RealNI64-run2"],
-    },
-        "indc": {
-            "ShufSA": ["b1h2NF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT",
-                       "b1h2NF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-run2"],
 
-            "FRC": ["b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctFRC_RealNI64",
-                          "b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctFRC_RealNI64-run2"],
-            "ShufFRC": ["b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-lsctFRC_RealNI64",
-                          "b1jNF-1024-indc2-cntralgn-lcam-ctc-32-128-lsctSASTT-lsctFRC_RealNI64-run2"],
-        }
-    }
-    UNI={
-        "Uni": {"Fin":["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT","b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
-    }
     e=executer();
-    e.eval_batch(STRA);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", STRA, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/stra.tex")
-    e.eval_batch(CFLA);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", CFLA, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/cfla.tex")
-
-    e.eval_batch(UNI);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", UNI, PD,
-                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/uni.tex")
-
-    e.eval_batch(LSCTA);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta.tex")
+    e.eval_batch(DLC);
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/", DLC, PD,
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/dlc.tex")

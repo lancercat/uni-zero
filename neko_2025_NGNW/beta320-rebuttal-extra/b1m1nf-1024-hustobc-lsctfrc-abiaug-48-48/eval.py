@@ -26,13 +26,13 @@ if __name__ == '__main__':
     torch.backends.cudnn.benchmark=False; # bcs cotrianing will mess it up.
     tome = neko_320_tome();
     tome.net_size_meta=neko_320_net_size_meta({
-        neko_320_net_size_meta.PARAM_WORD_IM_DATA_SIZE: [32,128]
+        neko_320_net_size_meta.PARAM_ITEM_IM_DATA_SIZE: [48,48]
     });
     if(len(sys.argv)>2):
         pcfg=neko_platform_cfg(sys.argv[1]);
         ITRS = json.loads(sys.argv[2]);
     else:
-        ITRS = {"_E1_I40000": 100000, "_E2": 120000, "_E2_I20000": 140000};
+        ITRS = { "_E2": 120000};
         pcfg=neko_platform_cfg(None);
     tome=arm_taskgrp(pcfg,tome);
 

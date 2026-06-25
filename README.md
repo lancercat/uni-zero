@@ -1,2 +1,5 @@
 # ECCV: Beyond Script Family Boundaries: Towards Unified Open-Set Scene Text Recognition
 Running checks... 
+
+It runs on my machine!
+

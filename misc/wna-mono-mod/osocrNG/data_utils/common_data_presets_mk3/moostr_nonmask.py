@@ -536,6 +536,17 @@ class moostr_mk3_data_factory(abstract_mk3_data_factory):
             "tests": test_dict
         };
     @classmethod
+    def get_osocr_test_hori(cls,dataroot, v2h=-9,pfx=""):
+        meta_dict, data_dict, test_dict={},{},{};
+        meta_dict, data_dict, test_dict=cls.arm_osocr_test_kr_full(meta_dict, data_dict, test_dict,dataroot,v2h);
+
+        meta_dict, data_dict, test_dict=cls.arm_osocr_test_jpn_full(meta_dict, data_dict, test_dict,dataroot,v2h);
+        return {
+            "meta": meta_dict,
+            "data": data_dict,
+            "tests": test_dict
+        };
+    @classmethod
     def get_osocr_test_all(cls,dataroot, v2h=-9,pfx=""):
         meta_dict, data_dict, test_dict={},{},{};
         meta_dict, data_dict, test_dict=cls.arm_osocr_test_kr_full(meta_dict, data_dict, test_dict,dataroot,v2h);
@@ -789,7 +800,7 @@ class moostr_mk3_data_factory(abstract_mk3_data_factory):
                                                   cls.PARAM_anchor_dict: anchor_dict,
                                               }
                                               );
-        tedd=cls.get_osocr_test_all(data_root,-9);
+        tedd=cls.get_osocr_test_hori(data_root,-9);
         return trad,trqd,trm,tedd;
     @classmethod
     def get_mk3_benchmark_release(cls,data_root,anchor_dict,queue_name):

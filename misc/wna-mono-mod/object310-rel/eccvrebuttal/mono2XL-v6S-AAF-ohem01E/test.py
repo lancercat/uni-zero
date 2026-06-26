@@ -27,7 +27,7 @@ if __name__ == '__main__':
     modset = neko_module_opt_setNG();
     modset.arm_modules(modcfgdict, bogo_dict);
     modset.to(cfg.devices[0]);
-    modset.load("_E2");
+    modset.load("_E3");
     # modset.bfloat16();
 
     e=neko_environment(assets_dict={},queue_dict=trqd,modset=modset);

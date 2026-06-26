@@ -33,6 +33,7 @@ def calculate_metrics(gt_folder, pred_folder):
             # Load Pred text
             with open(os.path.join(pred_folder, pred_files[pk]), 'r', encoding='utf-8') as f:
                 pred_text = f.read().strip()#.replace("⑨","")
+                # if you are running a dataset where punctuation are not annotated in GT, uncomment .replace("⑨","")
         except:
             pred_text="";
         # Calculate metrics
@@ -55,16 +56,15 @@ def calculate_metrics(gt_folder, pred_folder):
         print("No matching file IDs found between the two folders.")
 
 if __name__ == '__main__':
-    gt_path="/run/media/lasercat/writebuffer/tmp/hydra_results_uni_gt/yi50_gt/";
+    gt_path="/run/media/lasercat/writebuffer/uni-zero/misc/llmresults/yi50_gt/";
 
     # Paths
     # gt_path = '/run/media/lasercat/writebuffer/tmp/synthyi_5k/ours-vs-gpt2/gt/'
-    # pred_path = '/run/media/lasercat/writebuffer/tmp/synthyi_5k/ours-vs-gpt2/ours-uni/'
+    pred_path = '/run/media/lasercat/writebuffer/tmp/synthyi_5k/ours-vs-gpt2/ours-uni/'
 
     # gt_path="/run/media/lasercat/writebuffer/tmp/hydra_results_uni_gt/syn_yi_hori_gzsl/";
     # pred_path="/run/media/lasercat/writebuffer/tmp/hydra_results_uni_pred/syn_yi_hori_gzsl/";
     #
 
-    pred_path="/run/media/lasercat/writebuffer/tmp/synthyi_5k/predicts/qwen3.6_27b/";
-    pred_path="/home/lasercat/kn/data/eccv_rebuttal/predicts_nocset/gemini-3.1-flash-lite-preview/"
+    #pred_path="/run/media/lasercat/writebuffer/uni-zero/misc/llmresults/chatgpt/"
     calculate_metrics(gt_path, pred_path)

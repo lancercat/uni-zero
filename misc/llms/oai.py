@@ -71,5 +71,6 @@ def run_sequential_ocr(target_folder, api_key):
 
 
 # Execute
+# This key is revoked btw.
 MY_SK = "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"
 run_sequential_ocr("/run/media/lasercat/writebuffer/tmp/synthyi_5k/imgs/sampled_images/", MY_SK)

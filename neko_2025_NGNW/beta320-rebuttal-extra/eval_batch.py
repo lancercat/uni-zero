@@ -208,8 +208,8 @@ if __name__ == '__main__':
         "istrtest_hindi-task_performance": "CTHI",
         "istrtest_punjabi-task_performance": "CTPU",
         "istrtest_kannada-task_performance": "CTKA",
-        "istrtest_tamil-task_performance": "CTTE",
-        "istrtest_telugu-task_performance": "CTTA",
+        "istrtest_tamil-task_performance": "CTTA",
+        "istrtest_telugu-task_performance": "CTTE",
         "istrtest_odia-task_performance": "CTOD",
         "istrtest_marathi-task_performance": "CTMAR",
         "istrtest_malayalam-task_performance": "CTMAL",
@@ -220,15 +220,14 @@ if __name__ == '__main__':
             "SSL": ["b1m3nf-1024-hustobcZ-lsctfrc-abiaug-48-48-re"],
         },
         "Aff": {
-            "Bas" :["b1l1NF-1024-hindi-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-kannada-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-malayalam-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-marathi-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-odia-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-punjabi-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-tamil-cntralgn-lcam-ctc-32-128",
-                    "b1l1NF-1024-telugu-cntralgn-lcam-ctc-32-128"]
-        }
+            "Hin":["b1l1NF-1024-hindi-cntralgn-lcam-ctc-32-128"],
+            "Kan":["b1l1NF-1024-kannada-cntralgn-lcam-ctc-32-128"],
+            "Mal":["b1l1NF-1024-malayalam-cntralgn-lcam-ctc-32-128"],
+            "Mar":["b1l1NF-1024-marathi-cntralgn-lcam-ctc-32-128"],
+            "Odi":["b1l1NF-1024-odia-cntralgn-lcam-ctc-32-128"],
+            "Pun":["b1l1NF-1024-punjabi-cntralgn-lcam-ctc-32-128"],
+            "Tam":["b1l1NF-1024-tamil-cntralgn-lcam-ctc-32-128"],
+            "Tel":["b1l1NF-1024-telugu-cntralgn-lcam-ctc-32-128"]}
     }
 
     e=executer();

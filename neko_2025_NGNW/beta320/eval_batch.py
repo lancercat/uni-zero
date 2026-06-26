@@ -217,8 +217,8 @@ if __name__ == '__main__':
         "istrtest_hindi-task_performance": "CTHI",
         "istrtest_punjabi-task_performance": "CTPU",
         "istrtest_kannada-task_performance": "CTKA",
-        "istrtest_tamil-task_performance": "CTTE",
-        "istrtest_telugu-task_performance": "CTTA",
+        "istrtest_tamil-task_performance": "CTTA",
+        "istrtest_telugu-task_performance": "CTTE",
         "istrtest_odia-task_performance": "CTOD",
         "istrtest_marathi-task_performance": "CTMAR",
         "istrtest_malayalam-task_performance": "CTMAL",
@@ -261,7 +261,7 @@ if __name__ == '__main__':
         }
     }
     UNI={
-        "Uni": {"Fin":["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT","b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
+        "Uni": {"Uni":["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT","b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
     }
     e=executer();
     e.eval_batch(STRA);

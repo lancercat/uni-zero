@@ -239,7 +239,7 @@ if __name__ == '__main__':
         }
     }
     UNI={
-        "Uni": {"Fin":["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT","b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
+        "Uni": {"Uni":["b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT","b1h5NF-1024-all-cntralgn-lcam-ctc-32-128-SASTT-run2"]},
     }
     e=executer();
     e.eval_batch(STRA);

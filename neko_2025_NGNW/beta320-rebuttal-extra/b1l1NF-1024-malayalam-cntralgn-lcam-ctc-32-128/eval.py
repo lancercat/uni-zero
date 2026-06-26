@@ -32,7 +32,7 @@ if __name__ == '__main__':
         pcfg=neko_platform_cfg(sys.argv[1]);
         ITRS = json.loads(sys.argv[2]);
     else:
-        ITRS = {"_E1_I40000": 100000, "_E2": 120000, "_E2_I20000": 140000};
+        ITRS = { "_E2": 120000};
         pcfg=neko_platform_cfg(None);
     tome=arm_taskgrp(pcfg,tome);
 

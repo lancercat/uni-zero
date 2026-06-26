@@ -3,3 +3,7 @@ Running checks...
 
 It runs on my machine!
 
+Number checked on my machine-- ready to release
+
+Documentation and clean room test will be done before conference. 
+

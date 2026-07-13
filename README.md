@@ -7,3 +7,7 @@ Number checked on my machine-- ready to release
 
 Documentation and clean room test will be done before conference. 
 
+Setting up testing bench....
+
+Uploading release candidate to kaggle....
+

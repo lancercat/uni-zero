@@ -254,4 +254,5 @@ if __name__ == '__main__':
                             "/run/media/lasercat/320-eccv/results/hydra_results_eccv/uni_xproto.tex")
 
     e.eval_batch(LSCTA);
-    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,"/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta_xproto.tex")
+    e.generate_latex_report("/run/media/lasercat/320-eccv/results/hydra_results_eccv/",LSCTA,PD,
+                            "/run/media/lasercat/320-eccv/results/hydra_results_eccv/lscta_xproto.tex")

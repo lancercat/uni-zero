@@ -69,7 +69,7 @@ def cp(methods_list, src_root, dst_root):
 
 if __name__ == '__main__':
     # Combine all target dictionaries into a list
-    all_dicts = [UNI]
+    all_dicts = [STRA,CFLA,LSCTA]
 
     # Use a set to collect only unique method names
     unique_methods = set()

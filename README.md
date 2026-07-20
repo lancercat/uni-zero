@@ -1,6 +1,6 @@
 # ECCV: Beyond Script Family Boundaries: Towards Unified Open-Set Scene Text Recognition
 
-Documents: 
+step by step reproduction documents: 
 
 documents/manul.pdf
 

@@ -97,9 +97,9 @@ def thresh_diff(diffdict, thresh):
                 filtered_dict[category][metric] = subkeys
 
     return filtered_dict
-fs=glob.glob('/home/lasercat/cat/uni-zero/documents/results_dev/*.tex')
+fs=glob.glob('../documents/results_dev//*.tex')
 for orig in fs:
-    reimpl=os.path.join('/home/lasercat/testbed/results/hydra_results_eccv/',os.path.basename(orig));
+    reimpl=os.path.join('/run/media/lasercat/320-eccv/results/hydra_results_eccv/',os.path.basename(orig));
     try:
         diff_report=diff_reimpl(orig,reimpl)
         # 2. Filter for significant performance shifts (e.g., delta >= 1.0)

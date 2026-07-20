@@ -1,3 +1,5 @@
+import glob
+import os.path
 import re
 
 
@@ -95,9 +97,14 @@ def thresh_diff(diffdict, thresh):
                 filtered_dict[category][metric] = subkeys
 
     return filtered_dict
-
-diff_report = diff_reimpl( '/run/media/lasercat/data/cat/Object320-EX/results/stra.tex','/run/media/lasercat/data/cat/Object320-EX/results/strb.tex')
-
-# 2. Filter for significant performance shifts (e.g., delta >= 1.0)
-significant_changes = thresh_diff(diff_report, 0.1)
-print(significant_changes)
+fs=glob.glob('/home/lasercat/cat/uni-zero/documents/results_dev/*.tex')
+for orig in fs:
+    reimpl=os.path.join('/home/lasercat/testbed/results/hydra_results_eccv/',os.path.basename(orig));
+    try:
+        diff_report=diff_reimpl(orig,reimpl)
+        # 2. Filter for significant performance shifts (e.g., delta >= 1.0)
+        significant_changes = thresh_diff(diff_report, 0.2)
+        print(significant_changes);
+    except:
+        print("missing logs",reimpl)
+        pass;

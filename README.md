@@ -1,18 +1,13 @@
 # ECCV: Beyond Script Family Boundaries: Towards Unified Open-Set Scene Text Recognition
-Running checks... 
 
-It runs on my machine!
+Documents: 
 
-Number checked on my machine-- ready to release
+documents/manul.pdf
 
-Documentation and clean room test will be done before conference. 
+Data:
 
-Setting up testing bench....
+https://www.kaggle.com/datasets/object300/osocr-training-v320
 
-Uploading release candidate to kaggle....
+Models:
 
-Testing and adding missing files into pre-release dataset... 
-
-Testing related data seems to be okay... Preparing for uploading. 
-
-Uploading dataset (80.65Gib).... 
+https://www.kaggle.com/models/object300/eccv26-uni-zero
